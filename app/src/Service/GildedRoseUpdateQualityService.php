@@ -6,6 +6,9 @@ use Runroom\GildedRose\Entity\Item;
 
 class GildedRoseUpdateQualityService
 {
+    const AGED_BRIE_NAME = 'Aged Brie';
+    const BACKSTAGE_TAFKAL80ETC_CONCERT_NAME = 'Backstage passes to a TAFKAL80ETC concert';
+    const SULFURAS_HAND_RAGNAROS_NAME = 'Sulfuras, Hand of Ragnaros';
 
     /**
      * @var Item[]
@@ -26,7 +29,7 @@ class GildedRoseUpdateQualityService
     function update_quality(): void
     {
         foreach ($this->items as $item) {
-            if ($item->name !== 'Aged Brie' and $item->name !== 'Backstage passes to a TAFKAL80ETC concert') {
+            if ($item->name !== self::AGED_BRIE_NAME && $item->name !== self::BACKSTAGE_TAFKAL80ETC_CONCERT_NAME) {
                 $this->sub_quality($item);
             } else {
                 $this->add_quality($item);
@@ -34,7 +37,7 @@ class GildedRoseUpdateQualityService
             }
 
             if ($item->sell_in < 0) {
-                if ($item->name !== 'Aged Brie') {
+                if ($item->name !== self::AGED_BRIE_NAME) {
                     $this->sub_quality($item);
                 } else {
                     $this->add_quality($item);
@@ -50,9 +53,9 @@ class GildedRoseUpdateQualityService
      */
     private function sub_quality(Item $item): void
     {
-        if ($item->name === 'Backstage passes to a TAFKAL80ETC concert') {
+        if ($item->name === self::BACKSTAGE_TAFKAL80ETC_CONCERT_NAME) {
             $item->quality = 0;
-        } else if ($item->quality > 0 && $item->name !== 'Sulfuras, Hand of Ragnaros') {
+        } else if ($item->quality > 0 && $item->name !== self::SULFURAS_HAND_RAGNAROS_NAME) {
             $item->quality--;
         }
     }
@@ -66,7 +69,7 @@ class GildedRoseUpdateQualityService
     {
         if ($item->quality < 50) {
             $item->quality++;
-            if ($item->name === 'Backstage passes to a TAFKAL80ETC concert' && $item->sell_in < 11) {
+            if ($item->name === self::BACKSTAGE_TAFKAL80ETC_CONCERT_NAME && $item->sell_in < 11) {
                 $item->quality++;
                 if ($item->sell_in < 6) {
                     $item->quality++;
