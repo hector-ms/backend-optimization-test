@@ -2,17 +2,25 @@
 
 namespace Runroom\GildedRose\Service;
 
+use Runroom\GildedRose\Entity\Item;
+
 class GildedRoseUpdateQualityService
 {
 
-    private $items;
+    /**
+     * @var Item[]
+     */
+    private array $items;
 
-    function __construct($items)
+    /**
+     * @param Items[] $items
+     */
+    function __construct(array $items)
     {
         $this->items = $items;
     }
 
-    function update_quality()
+    function update_quality() :void
     {
         foreach ($this->items as $item) {
             if ($item->name != 'Aged Brie' and $item->name != 'Backstage passes to a TAFKAL80ETC concert') {

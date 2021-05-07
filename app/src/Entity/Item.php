@@ -5,18 +5,37 @@ namespace Runroom\GildedRose\Entity;
 class Item
 {
 
-    public $name;
-    public $sell_in;
-    public $quality;
+    /**
+     * @var string
+     */
+    public string $name;
 
-    function __construct($name, $sell_in, $quality)
+    /**
+     * @var int
+     */
+    public int $sell_in;
+
+    /**
+     * @var int
+     */
+    public int $quality;
+
+    /**
+     * @param string $name
+     * @param int $sell_in
+     * @param int $quality
+     */
+    function __construct(string $name, int $sell_in, int $quality)
     {
         $this->name = $name;
         $this->sell_in = $sell_in;
         $this->quality = $quality;
     }
 
-    public function __toString()
+    /**
+     * @return string
+     */
+    public function __toString() :string
     {
         return "{$this->name}, {$this->sell_in}, {$this->quality}";
     }
