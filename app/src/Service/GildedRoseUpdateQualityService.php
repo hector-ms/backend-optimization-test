@@ -33,11 +33,11 @@ class GildedRoseUpdateQualityService
     function update_quality(): void
     {
         foreach ($this->items as $item) {
-            if ($item->name !== self::AGED_BRIE_NAME && $item->name !== self::BACKSTAGE_TAFKAL80ETC_CONCERT_NAME) {
-                $this->sub_quality($item);
-            } else {
+            if ($item->name === self::AGED_BRIE_NAME || $item->name === self::BACKSTAGE_TAFKAL80ETC_CONCERT_NAME) {
                 $this->add_quality($item);
                 $item->sell_in--;
+            } else {
+                $this->sub_quality($item);
             }
 
             if ($item->sell_in < 0) {
