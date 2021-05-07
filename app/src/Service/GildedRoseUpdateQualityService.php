@@ -1,16 +1,19 @@
 <?php
 
-namespace Runroom\GildedRose;
+namespace Runroom\GildedRose\Service;
 
-class GildedRose {
+class GildedRoseUpdateQualityService
+{
 
     private $items;
 
-    function __construct($items) {
+    function __construct($items)
+    {
         $this->items = $items;
     }
 
-    function update_quality() {
+    function update_quality()
+    {
         foreach ($this->items as $item) {
             if ($item->name != 'Aged Brie' and $item->name != 'Backstage passes to a TAFKAL80ETC concert') {
                 if ($item->quality > 0) {
