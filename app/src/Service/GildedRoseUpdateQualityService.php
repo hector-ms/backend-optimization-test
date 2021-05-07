@@ -10,6 +10,10 @@ class GildedRoseUpdateQualityService
     const BACKSTAGE_TAFKAL80ETC_CONCERT_NAME = 'Backstage passes to a TAFKAL80ETC concert';
     const SULFURAS_HAND_RAGNAROS_NAME = 'Sulfuras, Hand of Ragnaros';
 
+    const MAX_QUALITY_EDITABLE = 50;
+    const LOW_SELL_IN = 11;
+    const VERY_LOW_SELL_IN = 6;
+
     /**
      * @var Item[]
      */
@@ -37,10 +41,10 @@ class GildedRoseUpdateQualityService
             }
 
             if ($item->sell_in < 0) {
-                if ($item->name !== self::AGED_BRIE_NAME) {
-                    $this->sub_quality($item);
-                } else {
+                if ($item->name === self::AGED_BRIE_NAME) {
                     $this->add_quality($item);
+                } else {
+                    $this->sub_quality($item);
                 }
             }
         }
@@ -67,11 +71,11 @@ class GildedRoseUpdateQualityService
      */
     private function add_quality(Item $item): void
     {
-        if ($item->quality < 50) {
+        if ($item->quality < self::MAX_QUALITY_EDITABLE) {
             $item->quality++;
-            if ($item->name === self::BACKSTAGE_TAFKAL80ETC_CONCERT_NAME && $item->sell_in < 11) {
+            if ($item->name === self::BACKSTAGE_TAFKAL80ETC_CONCERT_NAME && $item->sell_in < self::LOW_SELL_IN) {
                 $item->quality++;
-                if ($item->sell_in < 6) {
+                if ($item->sell_in < self::VERY_LOW_SELL_IN) {
                     $item->quality++;
                 }
             }
