@@ -4,7 +4,6 @@ namespace Runroom\GildedRose\Entity;
 
 class Item
 {
-
     /**
      * @var string
      */
