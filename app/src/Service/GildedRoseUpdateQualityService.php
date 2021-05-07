@@ -30,9 +30,6 @@ class GildedRoseUpdateQualityService
                 $this->sub_quality($item);
             } else {
                 $this->add_quality($item);
-            }
-
-            if ($item->name !== 'Sulfuras, Hand of Ragnaros') {
                 $item->sell_in--;
             }
 
